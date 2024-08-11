@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message Todo {
+    int32 id = 1;
+    string name = 2;
+    string description = 3;
+}
+message Todos{
+    repeated Todo todos=1;
+}
+
+message TodoId {
+    int32 id = 1;
+}
+message Empty{
+
+}
+service CrudTodo {
+    rpc AddTodo (Todo) returns (Todo);
+    rpc GetTodo (TodoId) returns (Todo);
+    rpc UpdateTodo (Todo) returns (Todo);
+    rpc DeleteTodo (TodoId) returns (Todo);
+    rpc GetAllTodos(Empty) returns (Todos);
+}
