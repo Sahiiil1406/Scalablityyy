@@ -1,0 +1,9 @@
+
+# Node.js Dockerfile
+FROM node:16
+WORKDIR /app
+COPY package*.json ./
+COPY .env ./
+RUN npm install
+COPY . .
+CMD ["node","index.js"]

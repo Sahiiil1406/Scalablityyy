@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  localstack:
+    container_name: localstack-main
+    image: localstack/localstack
+    ports:
+      - "4566:4566"            # LocalStack main service port
+      - "4571:4571"            # LocalStack debug port
+    environment:
+      - SERVICES=s3,dynamodb,lambda,sqs,sns,cloudformation,ec2
+      - DEBUG=1                # Enable debug logging
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - ./localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock

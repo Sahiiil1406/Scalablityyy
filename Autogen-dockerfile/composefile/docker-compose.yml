@@ -1,0 +1,36 @@
+
+version: '3.8'
+services:
+
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile.webapp
+    ports:
+      - "8000:80"
+    networks:
+      - shared_network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8001:81"
+    networks:
+      - shared_network
+
+  postgres_db:
+    image: postgres:13
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=secret
+    networks:
+      - shared_network
+
+
+networks:
+  shared_network:
+    driver: bridge
